@@ -1,6 +1,6 @@
 import pictureD from "./images/image-product-desktop.jpg"
 import pictureM from "./images/image-product-mobile.jpg"
-import cart from "./images/icon-cart.svg"
+
 import { useEffect, useState } from "react";
 function App() {
   const [mobile, setMobile] = useState(false)
