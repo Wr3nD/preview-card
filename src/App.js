@@ -5,17 +5,30 @@ import { useEffect, useState } from "react";
 function App() {
   const [mobile, setMobile] = useState(false)
 
-
   useEffect(() => {
-    if (window.innerWidth >= 376) {
-      setMobile(true)
+    if (window.innerWidth < 376) {
+      setMobile(true);
     }
-  }, [])
+  }, []);
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 376) {
+        setMobile(true);
+      } else {
+        setMobile(false);
+      }
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="h-screen w-screen  flex justify-center items-center bg-[#f2ebe3]">
       <main className="bg-white w-[350px] md:w-full  md:max-w-screen-md overflow-hidden  mx-auto grid grid-cols-1 md:grid-cols-2 rounded-lg">
         <picture>
-          <img src={!mobile ? pictureM : pictureD} alt="picture" className="w-max h-max object-contain " />
+          <img src={mobile ? pictureM : pictureD} alt="picture" className="w-max h-max object-contain " />
         </picture>
         <div className="p-6 md:p-10 flex flex-col">
           <h3 className="text-gray-500 uppercase text-base md:text-lg tracking-[5px] font-Montserrat mb-4 md:mb-6">
